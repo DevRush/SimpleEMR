@@ -17,7 +17,7 @@ function PatientChartHeader({ patientId, onBack }: { patientId: string; onBack: 
 }
 
 export default function App() {
-  const { mode, ready, enterDemo, enterFresh } = useDatabase();
+  const { mode, ready, savedMode, enterDemo, enterFresh, enterSaved } = useDatabase();
   const [route, setRoute] = useState<Route>({ page: 'home' });
   const [showSettings, setShowSettings] = useState(false);
 
@@ -25,7 +25,7 @@ export default function App() {
   const goPatient = useCallback((id: string) => setRoute({ page: 'patient', id }), []);
 
   if (mode === 'landing') {
-    return <LandingPage onDemo={enterDemo} onFresh={enterFresh} />;
+    return <LandingPage onDemo={enterDemo} onFresh={enterFresh} onContinue={savedMode ? enterSaved : undefined} />;
   }
 
   if (!ready) {

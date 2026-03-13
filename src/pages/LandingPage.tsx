@@ -3,9 +3,10 @@ import { Button } from '@/components/shared/Button';
 interface LandingPageProps {
   onDemo: () => void;
   onFresh: () => void;
+  onContinue?: () => void;
 }
 
-export function LandingPage({ onDemo, onFresh }: LandingPageProps) {
+export function LandingPage({ onDemo, onFresh, onContinue }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center justify-center px-4">
       <div className="max-w-xl text-center">
@@ -50,18 +51,32 @@ export function LandingPage({ onDemo, onFresh }: LandingPageProps) {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button onClick={onDemo} className="px-8 py-3 text-base">
-            Try Demo
-          </Button>
-          <Button onClick={onFresh} variant="secondary" className="px-8 py-3 text-base">
-            Start Fresh
-          </Button>
+          {onContinue ? (
+            <>
+              <Button onClick={onContinue} className="px-8 py-3 text-base">
+                Open Records
+              </Button>
+              <Button onClick={onDemo} variant="secondary" className="px-8 py-3 text-base">
+                Try Demo
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={onDemo} className="px-8 py-3 text-base">
+                Try Demo
+              </Button>
+              <Button onClick={onFresh} variant="secondary" className="px-8 py-3 text-base">
+                Start Fresh
+              </Button>
+            </>
+          )}
         </div>
 
         <p className="text-xs text-gray-400 mt-6">
-          Demo loads 12 sample patients with realistic clinical data.
-          <br />
-          All data is stored in your browser — nothing is sent to a server.
+          {onContinue
+            ? 'Your data is stored locally in this browser.'
+            : (<>Demo loads 12 sample patients with realistic clinical data.<br />All data is stored in your browser — nothing is sent to a server.</>)
+          }
         </p>
       </div>
     </div>

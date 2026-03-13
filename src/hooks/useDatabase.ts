@@ -4,9 +4,8 @@ import { seedDemoData } from '@/db/seed';
 type AppMode = 'landing' | 'demo' | 'fresh';
 
 export function useDatabase() {
-  const [mode, setMode] = useState<AppMode>(() => {
-    return (localStorage.getItem('simpleemr-mode') as AppMode) || 'landing';
-  });
+  const savedMode = localStorage.getItem('simpleemr-mode') as 'demo' | 'fresh' | null;
+  const [mode, setMode] = useState<AppMode>('landing');
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -14,7 +13,9 @@ export function useDatabase() {
       if (mode === 'demo') {
         await seedDemoData();
       }
-      setReady(true);
+      if (mode !== 'landing') {
+        setReady(true);
+      }
     }
     init();
   }, [mode]);
@@ -29,5 +30,9 @@ export function useDatabase() {
     setMode('fresh');
   }
 
-  return { mode, ready, enterDemo, enterFresh };
+  function enterSaved() {
+    if (savedMode) setMode(savedMode);
+  }
+
+  return { mode, ready, savedMode, enterDemo, enterFresh, enterSaved };
 }
