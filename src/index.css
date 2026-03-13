@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-accent: #059669;
+  --color-alert: #DC2626;
+}
+
+/* Print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-target,
+  .print-target * {
+    visibility: visible;
+  }
+  .print-target {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    color: #000;
+  }
+  .print-target h1 { font-size: 16pt; }
+  .print-target h2 { font-size: 14pt; margin-top: 12pt; }
+  .print-section { page-break-inside: avoid; }
+  button, nav, .no-print { display: none !important; }
+}
