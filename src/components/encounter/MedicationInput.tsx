@@ -35,7 +35,7 @@ export function MedicationInput({ medications, onChange }: MedicationInputProps)
         <button
           type="button"
           onClick={addMed}
-          className="text-xs text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+          className="text-sm text-blue-600 hover:text-blue-800 active:text-blue-900 font-medium cursor-pointer py-1 px-2 -mr-2"
         >
           + Add Medication
         </button>
@@ -53,7 +53,7 @@ export function MedicationInput({ medications, onChange }: MedicationInputProps)
               <button
                 type="button"
                 onClick={() => removeMed(i)}
-                className="text-xs text-red-500 hover:text-red-700 cursor-pointer"
+                className="text-xs text-red-500 hover:text-red-700 active:text-red-800 cursor-pointer py-1 px-2 -mr-2"
               >
                 Remove
               </button>

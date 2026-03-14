@@ -41,7 +41,7 @@ export function VitalsInput({ vitals, onChange }: VitalsInputProps) {
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-700 mb-2">Vitals</h3>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
         <VitalField label="Temp" unit="°C" value={vitals.temperature} onChange={(v) => update('temperature', v)} />
         <VitalField label="HR" unit="bpm" value={vitals.heartRate} onChange={(v) => update('heartRate', v)} />
         <div>

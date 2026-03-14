@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from '@/db';
 import { usePatientSearch } from '@/hooks/usePatientSearch';
 import { SearchResults } from './SearchResults';
 import { Button } from '@/components/shared/Button';
+import { calculateAge } from '@/utils/age';
+import { formatSex } from '@/utils/format';
 
 interface HomeScreenProps {
   onSelectPatient: (id: string) => void;
@@ -11,9 +15,13 @@ interface HomeScreenProps {
 export function HomeScreen({ onSelectPatient, onNewPatient }: HomeScreenProps) {
   const [query, setQuery] = useState('');
   const results = usePatientSearch(query);
+  const recentPatients = useLiveQuery(async () => {
+    const all = await db.patients.toArray();
+    return all.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).slice(0, 5);
+  });
 
   return (
-    <div className="min-h-[calc(100vh-57px)] flex flex-col items-center justify-start pt-[15vh] px-4">
+    <div className="min-h-[calc(100dvh-57px)] flex flex-col items-center justify-start pt-[15dvh] px-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-1">SimpleEMR</h2>
@@ -53,6 +61,33 @@ export function HomeScreen({ onSelectPatient, onNewPatient }: HomeScreenProps) {
             + New Patient
           </Button>
         </div>
+
+        {/* Recent patients — shown when not searching */}
+        {!query.trim() && recentPatients && recentPatients.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-1">
+              Recent Patients
+            </h3>
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+              {recentPatients.map((patient, i) => (
+                <button
+                  key={patient.id}
+                  onClick={() => onSelectPatient(patient.id)}
+                  className={`w-full px-4 py-3 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors flex items-center justify-between cursor-pointer ${
+                    i > 0 ? 'border-t border-gray-100' : ''
+                  }`}
+                >
+                  <span className="font-medium text-gray-800 italic">
+                    {patient.firstName} {patient.lastName}
+                  </span>
+                  <span className="text-sm text-gray-400">
+                    {calculateAge(patient.dob)}y {formatSex(patient.sex)}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

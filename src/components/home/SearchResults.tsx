@@ -31,7 +31,7 @@ export function SearchResults({ results, onSelect }: SearchResultsProps) {
               {patient.firstName} {patient.lastName}
             </span>
             <span className="ml-2 text-sm text-gray-500">
-              {formatSex(patient.sex)} {calculateAge(patient.dob)}y
+              {calculateAge(patient.dob)}y {formatSex(patient.sex)}
             </span>
           </div>
           <span className="text-xs text-gray-400">

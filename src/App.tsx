@@ -61,7 +61,8 @@ export default function App() {
           {/* Settings gear */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="fixed bottom-4 right-4 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 shadow-sm transition-colors cursor-pointer"
+            className="fixed right-4 w-12 h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 active:bg-gray-100 shadow-sm transition-colors cursor-pointer"
+            style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
             title="Settings"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +71,7 @@ export default function App() {
             </svg>
           </button>
           {showSettings && (
-            <div className="fixed bottom-16 right-4 bg-white border border-gray-200 rounded-xl shadow-lg p-4 space-y-3 w-64 z-50">
+            <div className="fixed right-4 bg-white border border-gray-200 rounded-xl shadow-lg p-4 space-y-3 w-64 z-50" style={{ bottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>
               <h3 className="text-sm font-semibold text-gray-800">Data</h3>
               <Button variant="secondary" onClick={exportAllData} className="w-full text-xs">
                 Export All Data (JSON)

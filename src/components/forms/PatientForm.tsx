@@ -61,7 +61,7 @@ export function PatientForm({ existing, onSave, onCancel }: PatientFormProps) {
       </h2>
 
       <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="First Name *"
             value={firstName}
@@ -77,7 +77,7 @@ export function PatientForm({ existing, onSave, onCancel }: PatientFormProps) {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="Date of Birth *"
             type="date"
