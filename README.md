@@ -43,4 +43,8 @@ npm run preview   # preview the production build
 
 Still early. If you work somewhere this would actually be useful, open an issue and tell me what's missing.
 
+## License
+
+[GPL-3.0](LICENSE) — free for any clinic to use, modify, and share. If you distribute a modified version, you have to share your source too.
+
 More projects at [annasrahman.com](https://annasrahman.com).
