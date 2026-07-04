@@ -4,7 +4,7 @@ import { db } from '@/db';
 import { usePatientSearch } from '@/hooks/usePatientSearch';
 import { SearchResults } from './SearchResults';
 import { Button } from '@/components/shared/Button';
-import { calculateAge } from '@/utils/age';
+import { formatAge } from '@/utils/age';
 import { formatSex } from '@/utils/format';
 
 interface HomeScreenProps {
@@ -81,7 +81,7 @@ export function HomeScreen({ onSelectPatient, onNewPatient }: HomeScreenProps) {
                     {patient.firstName} {patient.lastName}
                   </span>
                   <span className="text-sm text-gray-400">
-                    {calculateAge(patient.dob)}y {formatSex(patient.sex)}
+                    {formatAge(patient.dob)} {formatSex(patient.sex)}
                   </span>
                 </button>
               ))}

@@ -6,7 +6,7 @@ import { EncounterDetail } from './EncounterDetail';
 import { EncounterForm } from '@/components/encounter/EncounterForm';
 import { Button } from '@/components/shared/Button';
 import { formatDate, formatSex } from '@/utils/format';
-import { calculateAge } from '@/utils/age';
+import { formatAge } from '@/utils/age';
 
 interface PatientChartProps {
   patientId: string;
@@ -56,7 +56,7 @@ export function PatientChart({ patientId, onEditPatient }: PatientChartProps) {
               {patient.firstName} {patient.lastName}
             </h2>
             <span className="text-sm text-gray-500 flex-shrink-0">
-              {calculateAge(patient.dob)}y {formatSex(patient.sex)}
+              {formatAge(patient.dob)} {formatSex(patient.sex)}
             </span>
             <span className="text-sm text-gray-400 flex-shrink-0 hidden sm:inline">
               DOB {formatDate(patient.dob)}

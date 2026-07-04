@@ -1,5 +1,5 @@
 import type { Patient } from '@/types/patient';
-import { calculateAge } from '@/utils/age';
+import { formatAge } from '@/utils/age';
 import { formatDate, formatSex } from '@/utils/format';
 
 interface DemographicsProps {
@@ -16,7 +16,7 @@ export function Demographics({ patient, onEdit }: DemographicsProps) {
             {patient.firstName} {patient.lastName}
           </h1>
           <span className="text-sm font-medium text-gray-500">
-            {formatSex(patient.sex)} {calculateAge(patient.dob)}y
+            {formatSex(patient.sex)} {formatAge(patient.dob)}
           </span>
           <span className="text-sm text-gray-400">
             DOB: {formatDate(patient.dob)}

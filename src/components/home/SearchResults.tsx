@@ -1,5 +1,5 @@
 import type { Patient } from '@/types/patient';
-import { calculateAge } from '@/utils/age';
+import { formatAge } from '@/utils/age';
 import { formatDate, formatSex } from '@/utils/format';
 
 interface SearchResultsProps {
@@ -31,7 +31,7 @@ export function SearchResults({ results, onSelect }: SearchResultsProps) {
               {patient.firstName} {patient.lastName}
             </span>
             <span className="ml-2 text-sm text-gray-500">
-              {calculateAge(patient.dob)}y {formatSex(patient.sex)}
+              {formatAge(patient.dob)} {formatSex(patient.sex)}
             </span>
           </div>
           <span className="text-xs text-gray-400">
